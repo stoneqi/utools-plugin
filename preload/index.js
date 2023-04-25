@@ -28,6 +28,21 @@ const cityIndexes = [
   
 ]
 
+let res =[]
+cityIndexes.forEach(element => {
+    let temp = {
+      "code": "cityid"+element.title,
+      "explain":element.description,
+      // "icon": "res/xxx.png",u
+      // "icon": "data:image/png;base64,xxx...",
+      // "platform": ["win32", "darwin", "linux"]
+      "cmds": [element.title, element.description]
+    }
+    console.log(temp)
+    window.utools.setFeature(temp)
+});
+
+
 window.exports = {
   rmb: {
     mode: 'list',
