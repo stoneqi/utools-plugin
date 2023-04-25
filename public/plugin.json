@@ -19,6 +19,18 @@
           "label": "转大写人民币"
         }
       ]
+    },
+    {
+      "code": "cityid",
+      "explain": "城市映射表",
+      "cmds": [
+        {
+          "type": "over",
+          "label": "城市",
+          "minLength": 1,
+          "maxLength": 500
+        }
+      ]
     }
   ]
 }

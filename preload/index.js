@@ -16,6 +16,18 @@ const getDigitConvertList = (numStr) => {
   return list
 }
 
+const cityIndexes = [
+  {
+    title: '北京',
+    description: '1',
+  },
+  {
+    title: '天津',
+    description: '7',
+ },
+  
+]
+
 window.exports = {
   rmb: {
     mode: 'list',
@@ -36,16 +48,34 @@ window.exports = {
       }
     }
   },
-  converter: {
-    mode: 'none',
+  "cityid": { // 注意：键对应的是 plugin.json 中的 features.code
+    mode: 'list',
     args: {
-      enter: (action) => {
+      placeholder: '输入城市名',
+      search: (action, searchWord, callbackSetList) => {
+        searchWord = searchWord.trim()
+        if (!searchWord) return callbackSetList([])
+        let res =[]
+        cityIndexes.forEach(element => {
+          if (element.title.indexOf(searchWord) >= 0 || element.description.indexOf(searchWord) >= 0) {
+            let temp = {
+              "code": "hosts"+element.title,
+              "explain":element.description,
+              // "icon": "res/xxx.png",
+              // "icon": "data:image/png;base64,xxx...",
+              // "platform": ["win32", "darwin", "linux"]
+              "cmds": ["cityid"]
+            }
+            res.push(temp);
+          }
+        });
+        window.utools.setFeature(res)
+      },
+      select: (action, itemData) => {
         window.utools.hideMainWindow()
-        const result = Nzh.cn.toMoney(action.payload.replace(/,/g, ''), { outSymbol: false })
-        window.utools.copyText(result)
-        window.utools.showNotification('"' + result + '" 已复制')
+        window.utools.copyText(itemData.title)
         window.utools.outPlugin()
       }
     }
-  }
+ }
 }
