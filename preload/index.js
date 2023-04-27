@@ -1,13 +1,12 @@
-import Nzh from 'nzh'
 import { cityIds } from "./cityid";
 //@ts-check
 
 const cityIndexes = cityIds
 
-const setFeature =  (title, description, cmd) => {
+let setFeature =  (title, description, cmd) => {
   let temp = {
-    "code": "cityid",
-    "explain":description,
+    "code": "cityid-"+ description ,
+    "explain": title + ":"+description,
     // "icon": "res/xxx.png",u
     // "icon": "data:image/png;base64,xxx...",
     // "platform": ["win32", "darwin", "linux"]
